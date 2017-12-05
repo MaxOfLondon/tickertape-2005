@@ -1,0 +1,35 @@
+# Project: TickerTape
+# Makefile created by Dev-C++ 4.9.9.0
+
+CPP  = g++.exe
+CC   = gcc.exe
+WINDRES = windres.exe
+RES  = TickerTape_private.res
+OBJ  = main.o monitor.o $(RES)
+LINKOBJ  = main.o monitor.o $(RES)
+LIBS =  -L"C:/Dev-Cpp/lib" -mwindows  -s -march=pentium-mmx -mmmx 
+INCS =  -I"C:/Dev-Cpp/include" 
+CXXINCS =  -I"C:/Dev-Cpp/include/c++/3.3.1"  -I"C:/Dev-Cpp/include/c++/3.3.1/mingw32"  -I"C:/Dev-Cpp/include/c++/3.3.1/backward"  -I"C:/Dev-Cpp/lib/gcc-lib/mingw32/3.3.1/include"  -I"C:/Dev-Cpp/include" 
+BIN  = TickerTape.exe
+CXXFLAGS = $(CXXINCS)   -fexpensive-optimizations -O3 -march=pentium-mmx -mmmx
+CFLAGS = $(INCS)   -fexpensive-optimizations -O3 -march=pentium-mmx -mmmx
+
+.PHONY: all all-before all-after clean clean-custom
+
+all: all-before TickerTape.exe all-after
+
+
+clean: clean-custom
+	rm -f $(OBJ) $(BIN)
+
+$(BIN): $(OBJ)
+	$(CPP) $(LINKOBJ) -o "TickerTape.exe" $(LIBS)
+
+main.o: main.cpp
+	$(CPP) -c main.cpp -o main.o $(CXXFLAGS)
+
+monitor.o: monitor.cpp
+	$(CPP) -c monitor.cpp -o monitor.o $(CXXFLAGS)
+
+TickerTape_private.res: TickerTape_private.rc resource.rc 
+	$(WINDRES) -i TickerTape_private.rc -I rc -o TickerTape_private.res -O coff 
